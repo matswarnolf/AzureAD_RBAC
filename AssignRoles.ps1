@@ -27,15 +27,15 @@ New-AzResourceGroup -Name $ResourceGroupName -Location $location
 
 # Assign roles for the user in the resource group ----------------------
 $ReaderRoleParameters = @{
-    SignInName = $UserPrincipalName;
+    SignInName         = $UserPrincipalName;
     RoleDefinitionName = "Reader";
-    Scope = $SubscriptionScope
+    Scope              = $SubscriptionScope
 }
 
 $ContributorRoleParameters = @{
-    ResourceGroupName = $ResourceGroupName;
+    ResourceGroupName  = $ResourceGroupName;
     RoleDefinitionName = "Contributor";
-    SignInName = $UserPrincipalName
+    SignInName         = $UserPrincipalName
 }
 
 New-AzRoleAssignment $ReaderRoleParameters
