@@ -32,7 +32,8 @@ write-progress -Activity "processing site $($site.Title)" -Id 1 -PercentComplete
         
         $ExternalUsers += $guest
     }
-    clear-variable currentuser
+    If ($currentuser){clear-variable currentuser}
+    
     write-progress -id 2 -Completed -Activity "Done"
 }
 
