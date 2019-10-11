@@ -1,7 +1,7 @@
 import-module Microsoft.Online.SharePoint.PowerShell
 $cred = get-credential
-[String]$orgName = "foba"
-[System.Array]$ExternalUsers 
+[String]$orgName = "<TenantName>"
+[System.Array]$ExternalUsers = ""
 [Int]$sitenumber,$currentuser
 Write-host "Connecting to site https://$orgname-admin.sharepoint.com"
 try {
@@ -12,7 +12,7 @@ Catch {
 }
 
 $sites = get-sposite -Limit All
-Write-host "found $($sites.count)"
+Write-host "found $($sites.count) sites at $orgname"
 #get all external users by running
 clear-variable sitenumber,currentuser -ErrorAction SilentlyContinue
 foreach ($site in $sites) {
@@ -36,5 +36,12 @@ write-progress -Activity "processing site $($site.Title)" -Id 1 -PercentComplete
     
     write-progress -id 2 -Completed -Activity "Done"
 }
+clear-host
+Write-host "Done processing."
+Write-host "I found $($ExternalUsers.Count) external users in those $($sites.count) sites"
 
+$ExternalUsers | format-table
 
+Write-host "" 
+Write-host -ForegroundColor Yellow "Please note that because of internal PowerShell plumbing, this script can only find a maximum of 50 external users " -NoNewline
+Write-host -ForegroundColor Red  "per site"
