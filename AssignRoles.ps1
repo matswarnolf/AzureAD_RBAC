@@ -2,23 +2,34 @@
 #  - Reader på subscriptionnivå för att låta användaren navigera 
 #  - Contributor på ResourceGroup-nivå för att låta användaren jobba med vår resource group
 
-# TODO Lägg till rätt subscription ID i variablen SubscriptionScope
+Import-Module AzureADPreview
+Import-Module Az
+
+
+Connect-AzAccount
+connect-azuread -tenant b91f4433-61c4-45b8-8d58-d80dc613008b
+
+
+# Check that we are working in the right environment
+$Subscription = get-azcontext 
+Write-host "$($Subscription.Name)"
+read-host “Press ENTER to continue...”
 
 # Skapa användare ------------------------------------------------------
-$UserPrincipalName = "rbacdemouser@example.com"
+$UserPrincipalName = "rbacdemouser@mfredrikssongmail.onmicrosoft.com"
 $ResourceGroupName = "RBAC_DemoGroup"
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 $PasswordProfile.Password = "MyStupidDemoPa55w0rd"
-$SubscriptionScope = "/subscriptions/00000000-0000-0000-0000-000000000000" # ToDo Ändra här
+$SubscriptionScope = "/subscriptions/$($Subscription.Subscription.id)" 
 
-$UserParamameters = @{
+$UserParameters = @{
     DisplayName       = "RBAC Demo User";
     PasswordProfile   = $PasswordProfile;
     UserPrincipalName = $UserPrincipalName;
     AccountEnabled    = $true;
     MailNickName      = "rbacdemouser"
 }
-New-AzureADUser $UserParamameters
+New-AzureADUser @UserParameters
 
 # Skapa Resourcegroup --------------------------------------------------
 # Get-AzLocation | select-object -property Location
@@ -38,5 +49,5 @@ $ContributorRoleParameters = @{
     SignInName         = $UserPrincipalName
 }
 
-New-AzRoleAssignment $ReaderRoleParameters
-New-AzRoleAssignment $ContributorRoleParameters
+New-AzRoleAssignment @ReaderRoleParameters
+New-AzRoleAssignment @ContributorRoleParameters
