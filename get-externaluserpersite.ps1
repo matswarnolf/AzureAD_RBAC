@@ -43,5 +43,6 @@ Write-host "I found $($ExternalUsers.Count) external users in those $($sites.cou
 $ExternalUsers | format-table
 
 Write-host "" 
-Write-host -ForegroundColor Yellow "Please note that because of internal PowerShell plumbing, this script can only find a maximum of 50 external users " -NoNewline
-Write-host -ForegroundColor Red  "per site"
+Write-host  "Please note that because of internal PowerShell plumbing, "
+Write-host "this script can only find a maximum of 50 external users " -NoNewline
+Write-host -ForegroundColor Yellow  "per site"
