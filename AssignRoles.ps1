@@ -49,5 +49,11 @@ $ContributorRoleParameters = @{
     SignInName         = $UserPrincipalName
 }
 
+$VMoperatorRoleParameters = @{
+    ResourceGroupName  = $ResourceGroupName;
+    RoleDefinitionName = "Contributor";
+    SignInName         = $UserPrincipalName
+}
+
 New-AzRoleAssignment @ReaderRoleParameters
 New-AzRoleAssignment @ContributorRoleParameters
