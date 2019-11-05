@@ -1,3 +1,9 @@
-New-AzResourceGroupDeployment -Name ExampleDeployment -ResourceGroupName ExampleResourceGroup `
-  -TemplateFile c:\MyTemplates\azuredeploy.json `
-  -TemplateParameterFile c:\MyTemplates\storage.parameters.json
+
+$VM1 = @{
+  Name = "ExampleVM1";
+  ResourceGroupName = "RBAC_DemoGroup";
+  TemplateFile = C:\git\AzureAD_RBAC\VM\template.json;
+  TemplateParameterFile = C:\GIT\AzureAD_RBAC\VM\parameters.json
+}
+
+New-AzResourceGroupDeployment @VM1
