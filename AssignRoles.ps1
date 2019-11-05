@@ -1,13 +1,11 @@
-# Det här skriptet skapar en ny resourcegroup och en användare som tilldelas två roller:
+# Det här skriptet skapar en ny resourcegroup och en användare som tilldelas tre roller:
 #  - Reader på subscriptionnivå för att låta användaren navigera 
 #  - Contributor på ResourceGroup-nivå för att låta användaren jobba med vår resource group
-
-Import-Module AzureADPreview
-Import-Module Az
+#  - Virtual Machine Operator på Resource-nivå för att hantera VM:ar i resursgruppen
 
 
-Connect-AzAccount
-connect-azuread -tenant b91f4433-61c4-45b8-8d58-d80dc613008b
+
+
 
 
 # Check that we are working in the right environment
@@ -58,3 +56,5 @@ $VMoperatorRoleParameters = @{
 New-AzRoleAssignment @ReaderRoleParameters
 New-AzRoleAssignment @ContributorRoleParameters
 New-AzRoleAssignment @VMoperatorRoleParameters
+
+# done

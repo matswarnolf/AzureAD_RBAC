@@ -74,7 +74,7 @@
             "value": "mats"
         },
         "adminPassword": {
-            "value": null
+            "value": "$SecurePassword"
         },
         "diagnosticsStorageAccountName": {
             "value": "rbacdemogroupdiag"
