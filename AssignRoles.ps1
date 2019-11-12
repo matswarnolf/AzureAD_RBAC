@@ -56,5 +56,6 @@ $VMoperatorRoleParameters = @{
 New-AzRoleAssignment @ReaderRoleParameters
 New-AzRoleAssignment @ContributorRoleParameters
 New-AzRoleAssignment @VMoperatorRoleParameters
+Get-AzRoleAssignment -RoleDefinitionName "Reader"
 
 # done
