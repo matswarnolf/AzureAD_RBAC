@@ -4,22 +4,19 @@
 #  - Virtual Machine Operator på Resource-nivå för att hantera VM:ar i resursgruppen
 
 
-
-
-
-
 # Check that we are working in the right environment
 $Subscription = get-azcontext 
 Write-host "$($Subscription.Name)"
 read-host “Press ENTER to continue...”
 
-# Skapa användare ------------------------------------------------------
+# Variables ------------------------------------------------------
 $UserPrincipalName = "rbacdemouser@mfredrikssongmail.onmicrosoft.com"
 $ResourceGroupName = "RBAC_DemoGroup"
 $PasswordProfile = New-Object -TypeName Microsoft.Open.AzureAD.Model.PasswordProfile
 $PasswordProfile.Password = "MyStupidDemoPa55w0rd"
 $SubscriptionScope = "/subscriptions/$($Subscription.Subscription.id)" 
 
+# Create User ----------------------------------------------------
 $UserParameters = @{
     DisplayName       = "RBAC Demo User";
     PasswordProfile   = $PasswordProfile;
@@ -29,12 +26,12 @@ $UserParameters = @{
 }
 New-AzureADUser @UserParameters
 
-# Skapa Resourcegroup --------------------------------------------------
+# Skapa Resourcegroup ---------------------------------------------
 # Get-AzLocation | select-object -property Location
 $location = 'WestEurope'
 New-AzResourceGroup -Name $ResourceGroupName -Location $location
 
-# Assign roles for the user in the resource group ----------------------
+# Assign roles for the user in the resource group -----------------
 $ReaderRoleParameters = @{
     SignInName         = $UserPrincipalName;
     RoleDefinitionName = "Reader";
