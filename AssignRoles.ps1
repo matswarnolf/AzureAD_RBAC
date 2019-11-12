@@ -57,5 +57,6 @@ New-AzRoleAssignment @ReaderRoleParameters
 New-AzRoleAssignment @ContributorRoleParameters
 New-AzRoleAssignment @VMoperatorRoleParameters
 Get-AzRoleAssignment -RoleDefinitionName "Reader"
+Get-AzRoleAssignment -RoleDefinitionName "Virtual Machine Operator"
 
 # done
